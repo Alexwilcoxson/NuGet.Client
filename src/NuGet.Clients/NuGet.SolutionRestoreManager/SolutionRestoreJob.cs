@@ -148,17 +148,6 @@ namespace NuGet.SolutionRestoreManager
                 var solutionDirectory = _solutionManager.SolutionDirectory;
                 var isSolutionAvailable = await _solutionManager.IsSolutionAvailableAsync();
 
-                if (solutionDirectory == null)
-                {
-                    await _logger.DoAsync((l, _) =>
-                    {
-                        _status = NuGetOperationStatus.Failed;
-                        l.ShowError(Resources.SolutionIsNotSaved);
-                        l.WriteLine(VerbosityLevel.Minimal, Resources.SolutionIsNotSaved);
-                    });
-                    return;
-                }
-
                 // Get the projects from the SolutionManager
                 // Note that projects that are not supported by NuGet, will not show up in this list
                 projects = await _solutionManager.GetNuGetProjectsAsync();
